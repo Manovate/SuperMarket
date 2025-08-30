@@ -1,0 +1,307 @@
+<!-- payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - M Mart</title>
+  <!-- 🌟 Favicon Icon for Taskbar/Browser Tab -->
+  <link rel="icon" href="assets/logo.png" type="png" />
+
+  <!-- Optional: Apple Icon and Other Support -->
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <style>
+    /* payment.css */
+:root {
+  /* Bold Blue + Green Theme */
+  --bg: #e6fffa;
+  --surface: #ffffff;
+  --muted: #475569;
+  --text: #0a0f1f;
+
+  --accent: #0369a1;
+  --accent-2: #059669;
+
+  --card: #ffffff; 
+  --stroke: #cbd5e1;
+  --shadow: 0 20px 45px -15px rgba(3, 7, 18, .25);
+}
+
+/* General page styling */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Headings */
+h2, h3 {
+  text-align: center;
+  color: var(--accent-2);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+h2 { animation-delay: 0.1s; }
+h3 { animation-delay: 0.2s; }
+
+/* Sections */
+section {
+  background: var(--surface);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Table wrapper for responsiveness */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#summaryTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.4s;
+  min-width: 500px; /* ensures scroll on narrow screens */
+}
+
+#summaryTable th, #summaryTable td {
+  border-bottom: 1px solid var(--stroke);
+  padding: 12px;
+  text-align: center;
+  transition: background 0.3s ease;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+#summaryTable th {
+  background: var(--accent);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#summaryTable tr:hover {
+  background: rgba(5, 150, 105, 0.1);
+}
+
+/* Summary totals */
+#orderSummary p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+  transition: color 0.3s ease;
+}
+
+#orderSummary p strong {
+  color: var(--accent-2);
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+form .form-group {
+  flex: 1 1 48%; /* two per row on large screens */
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 8px 0 5px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+input, textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 8px rgba(5, 150, 105, 0.4);
+  outline: none;
+}
+
+/* Button styling */
+button {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  section {
+    margin: 15px;
+    padding: 15px 20px;
+  }
+
+  h2, h3 {
+    font-size: 1.3rem;
+  }
+
+  form .form-group {
+    flex: 1 1 100%; /* full width fields on smaller screens */
+  }
+
+  #summaryTable th, #summaryTable td {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  #orderSummary p {
+    font-size: 1rem;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  section {
+    margin: 10px;
+    padding: 12px 15px;
+    border-radius: 10px;
+  }
+
+  h2, h3 {
+    font-size: 1.1rem;
+  }
+
+  #summaryTable th, #summaryTable td {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  input, textarea {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
+
+/* Extra tiny screen adjustments */
+@media (max-width: 360px) {
+  section {
+    padding: 10px;
+  }
+
+  input, textarea, button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <h2>Checkout</h2>
+  <div class="table-wrapper">
+  <!-- Order Summary -->
+  <section id="orderSummary">
+    <h3>Your Order</h3>
+    <table id="summaryTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p><strong>Subtotal:</strong> <span id="summarySubtotal">₹0</span></p>
+    <p><strong>Delivery:</strong> <span id="summaryDelivery">₹0</span></p>
+    <p><strong>Grand Total:</strong> <span id="summaryTotal">₹0</span></p>
+  </section>
+
+  <!-- Delivery Form -->
+  <section>
+    <h3>Delivery Details</h3>
+    <form id="checkoutForm">
+      <label>Name</label>
+      <input type="text" name="name" required>
+
+      <label>Phone</label>
+      <input type="tel" name="phone" required>
+
+      <label>Address</label>
+      <textarea name="address" required></textarea>
+
+      <button type="submit">Confirm Order</button>
+    </form>
+  </section>
+</div>
+  
+
+  <script src="/static/checkout.js"></script>
+</body>
+</html>
